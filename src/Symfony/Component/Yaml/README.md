@@ -1,21 +1,32 @@
 Yaml Component
 ==============
 
-YAML implements most of the YAML 1.2 specification.
+[![Package version](https://img.shields.io/packagist/v/symfony/yaml.svg)](https://packagist.org/packages/symfony/yaml)
 
-```php
-use Symfony\Component\Yaml\Yaml;
+The Yaml Component implements most of the
+[YAML 1.2 specification](http://yaml.org/spec/1.2/spec.html).
 
-$array = Yaml::parse(file_get_contents(filename));
+[Documentation](http://symfony.com/doc/current/components/yaml).
 
-print Yaml::dump($array);
+Contributing
+------------
+
+[Symfony Contribution Guide](http://symfony.com/doc/current/contributing/index.html)
+
+To run the unit tests with the following command:
+
+```bash
+$ cd path/to/src/Symfony/Component/Yaml/
+$ composer install
+$ phpunit
 ```
 
-Resources
+Changelog
 ---------
 
-You can run the unit tests with the following command:
+Full changelog available [here](CHANGELOG.md).
 
-    $ cd path/to/Symfony/Component/Yaml/
-    $ composer install
-    $ phpunit
+License
+-------
+
+This project is under the [MIT License](LICENSE).
