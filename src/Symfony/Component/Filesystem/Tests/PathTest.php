@@ -167,7 +167,7 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideCanonicalizationTests
      */
-    public function testCanonicalize(string $path, string $canonicalized): void
+    public function testCanonicalize(string $path, string $canonicalized)
     {
         $this->assertSame($canonicalized, Path::canonicalize($path));
     }
@@ -228,7 +228,7 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideGetDirectoryTests
      */
-    public function testGetDirectory(string $path, string $directory): void
+    public function testGetDirectory(string $path, string $directory)
     {
         $this->assertSame($directory, Path::getDirectory($path));
     }
@@ -259,7 +259,7 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideGetFilenameWithoutExtensionTests
      */
-    public function testGetFilenameWithoutExtension(string $path, ?string $extension, string $filename): void
+    public function testGetFilenameWithoutExtension(string $path, ?string $extension, string $filename)
     {
         $this->assertSame($filename, Path::getFilenameWithoutExtension($path, $extension));
     }
@@ -284,7 +284,7 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideGetExtensionTests
      */
-    public function testGetExtension(string $path, bool $forceLowerCase, string $extension): void
+    public function testGetExtension(string $path, bool $forceLowerCase, string $extension)
     {
         $this->assertSame($extension, Path::getExtension($path, $forceLowerCase));
     }
@@ -331,7 +331,7 @@ class PathTest extends TestCase
      *
      * @param string|string[]|null $extension
      */
-    public function testHasExtension(bool $hasExtension, string $path, $extension, bool $ignoreCase): void
+    public function testHasExtension(bool $hasExtension, string $path, $extension, bool $ignoreCase)
     {
         $this->assertSame($hasExtension, Path::hasExtension($path, $extension, $ignoreCase));
     }
@@ -355,7 +355,7 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideChangeExtensionTests
      */
-    public function testChangeExtension(string $path, string $extension, string $pathExpected): void
+    public function testChangeExtension(string $path, string $extension, string $pathExpected)
     {
         $this->assertSame($pathExpected, Path::changeExtension($path, $extension));
     }
@@ -390,7 +390,7 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideIsAbsolutePathTests
      */
-    public function testIsAbsolute(string $path, bool $isAbsolute): void
+    public function testIsAbsolute(string $path, bool $isAbsolute)
     {
         $this->assertSame($isAbsolute, Path::isAbsolute($path));
     }
@@ -398,7 +398,7 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideIsAbsolutePathTests
      */
-    public function testIsRelative(string $path, bool $isAbsolute): void
+    public function testIsRelative(string $path, bool $isAbsolute)
     {
         $this->assertSame(!$isAbsolute, Path::isRelative($path));
     }
@@ -432,7 +432,7 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideGetRootTests
      */
-    public function testGetRoot(string $path, string $root): void
+    public function testGetRoot(string $path, string $root)
     {
         $this->assertSame($root, Path::getRoot($path));
     }
@@ -528,12 +528,12 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideMakeAbsoluteTests
      */
-    public function testMakeAbsolute(string $relativePath, string $basePath, string $absolutePath): void
+    public function testMakeAbsolute(string $relativePath, string $basePath, string $absolutePath)
     {
         $this->assertSame($absolutePath, Path::makeAbsolute($relativePath, $basePath));
     }
 
-    public function testMakeAbsoluteFailsIfBasePathNotAbsolute(): void
+    public function testMakeAbsoluteFailsIfBasePathNotAbsolute()
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The base path "webmozart/symfony" is not an absolute path.');
@@ -541,7 +541,7 @@ class PathTest extends TestCase
         Path::makeAbsolute('css/style.css', 'webmozart/symfony');
     }
 
-    public function testMakeAbsoluteFailsIfBasePathEmpty(): void
+    public function testMakeAbsoluteFailsIfBasePathEmpty()
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The base path must be a non-empty string. Got: ""');
@@ -578,7 +578,7 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideAbsolutePathsWithDifferentRoots
      */
-    public function testMakeAbsoluteDoesNotFailIfDifferentRoot(string $basePath, string $absolutePath): void
+    public function testMakeAbsoluteDoesNotFailIfDifferentRoot(string $basePath, string $absolutePath)
     {
         // If a path in partition D: is passed, but $basePath is in partition
         // C:, the path should be returned unchanged
@@ -681,12 +681,12 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideMakeRelativeTests
      */
-    public function testMakeRelative(string $absolutePath, string $basePath, string $relativePath): void
+    public function testMakeRelative(string $absolutePath, string $basePath, string $relativePath)
     {
         $this->assertSame($relativePath, Path::makeRelative($absolutePath, $basePath));
     }
 
-    public function testMakeRelativeFailsIfAbsolutePathAndBasePathNotAbsolute(): void
+    public function testMakeRelativeFailsIfAbsolutePathAndBasePathNotAbsolute()
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The absolute path "/webmozart/symfony/css/style.css" cannot be made relative to the relative path "webmozart/symfony". You should provide an absolute base path instead.');
@@ -694,7 +694,7 @@ class PathTest extends TestCase
         Path::makeRelative('/webmozart/symfony/css/style.css', 'webmozart/symfony');
     }
 
-    public function testMakeRelativeFailsIfAbsolutePathAndBasePathEmpty(): void
+    public function testMakeRelativeFailsIfAbsolutePathAndBasePathEmpty()
     {
         $this->expectExceptionMessage('The absolute path "/webmozart/symfony/css/style.css" cannot be made relative to the relative path "". You should provide an absolute base path instead.');
 
@@ -704,7 +704,7 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideAbsolutePathsWithDifferentRoots
      */
-    public function testMakeRelativeFailsIfDifferentRoot(string $absolutePath, string $basePath): void
+    public function testMakeRelativeFailsIfDifferentRoot(string $absolutePath, string $basePath)
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -723,7 +723,7 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideIsLocalTests
      */
-    public function testIsLocal(string $path, bool $isLocal): void
+    public function testIsLocal(string $path, bool $isLocal)
     {
         $this->assertSame($isLocal, Path::isLocal($path));
     }
@@ -843,7 +843,7 @@ class PathTest extends TestCase
      *
      * @param string[] $paths
      */
-    public function testGetLongestCommonBasePath(array $paths, ?string $basePath): void
+    public function testGetLongestCommonBasePath(array $paths, ?string $basePath)
     {
         $this->assertSame($basePath, Path::getLongestCommonBasePath(...$paths));
     }
@@ -932,7 +932,7 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideIsBasePathTests
      */
-    public function testIsBasePath(string $path, string $ofPath, bool $result): void
+    public function testIsBasePath(string $path, string $ofPath, bool $result)
     {
         $this->assertSame($result, Path::isBasePath($path, $ofPath));
     }
@@ -1011,12 +1011,12 @@ class PathTest extends TestCase
     /**
      * @dataProvider provideJoinTests
      */
-    public function testJoin(array $paths, $result): void
+    public function testJoin(array $paths, $result)
     {
         $this->assertSame($result, Path::join(...$paths));
     }
 
-    public function testJoinVarArgs(): void
+    public function testJoinVarArgs()
     {
         $this->assertSame('/path', Path::join('/path'));
         $this->assertSame('/path/to', Path::join('/path', 'to'));
@@ -1024,7 +1024,7 @@ class PathTest extends TestCase
         $this->assertSame('/path/to/test/subdir', Path::join('/path', 'to', '/test', 'subdir/'));
     }
 
-    public function testGetHomeDirectoryFailsIfNotSupportedOperationSystem(): void
+    public function testGetHomeDirectoryFailsIfNotSupportedOperationSystem()
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Your environment or operation system isn\'t supported');
@@ -1034,12 +1034,12 @@ class PathTest extends TestCase
         Path::getHomeDirectory();
     }
 
-    public function testGetHomeDirectoryForUnix(): void
+    public function testGetHomeDirectoryForUnix()
     {
         $this->assertEquals('/home/webmozart', Path::getHomeDirectory());
     }
 
-    public function testGetHomeDirectoryForWindows(): void
+    public function testGetHomeDirectoryForWindows()
     {
         putenv('HOME=');
         putenv('HOMEDRIVE=C:');
@@ -1048,7 +1048,7 @@ class PathTest extends TestCase
         $this->assertEquals('C:/users/webmozart', Path::getHomeDirectory());
     }
 
-    public function testNormalize(): void
+    public function testNormalize()
     {
         $this->assertSame('C:/Foo/Bar/test', Path::normalize('C:\\Foo\\Bar/test'));
     }
