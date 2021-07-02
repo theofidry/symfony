@@ -23,7 +23,7 @@ class PathTest extends TestCase
 {
     protected $storedEnv = [];
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->storedEnv['HOME'] = getenv('HOME');
         $this->storedEnv['HOMEDRIVE'] = getenv('HOMEDRIVE');
@@ -34,7 +34,7 @@ class PathTest extends TestCase
         putenv('HOMEPATH=');
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         putenv('HOME='.$this->storedEnv['HOME']);
         putenv('HOMEDRIVE='.$this->storedEnv['HOMEDRIVE']);
