@@ -441,7 +441,7 @@ final class Path
     public static function makeAbsolute(string $path, string $basePath): string
     {
         if ('' === $basePath) {
-            throw new InvalidArgumentException(sprintf('The base path must be a non-empty string. Got: "%s"', $basePath));
+            throw new InvalidArgumentException(sprintf('The base path must be a non-empty string. Got: "%s".', $basePath));
         }
 
         if (!self::isAbsolute($basePath)) {
