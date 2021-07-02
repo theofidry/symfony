@@ -105,38 +105,6 @@ final class Path
     }
 
     /**
-     * @return non-empty-string[]
-     */
-    private static function findCanonicalParts(string $root, string $pathWithoutRoot): array
-    {
-        $parts = \explode('/', $pathWithoutRoot);
-
-        $canonicalParts = [];
-
-        // Collapse "." and "..", if possible
-        foreach ($parts as $part) {
-            if ('.' === $part || '' === $part) {
-                continue;
-            }
-
-            // Collapse ".." with the previous part, if one exists
-            // Don't collapse ".." if the previous part is also ".."
-            if ('..' === $part && \count($canonicalParts) > 0 && '..' !== $canonicalParts[\count($canonicalParts) - 1]) {
-                \array_pop($canonicalParts);
-
-                continue;
-            }
-
-            // Only add ".." prefixes for relative paths
-            if ('..' !== $part || '' === $root) {
-                $canonicalParts[] = $part;
-            }
-        }
-
-        return $canonicalParts;
-    }
-
-    /**
      * Normalizes the given path.
      *
      * During normalization, all slashes are replaced by forward slashes ("/").
@@ -751,6 +719,38 @@ final class Path
         // won't be discovered as common prefix ("//" is not a prefix of
         // "/foobar/").
         return 0 === \mb_strpos($ofPath.'/', \rtrim($basePath, '/').'/');
+    }
+
+    /**
+     * @return non-empty-string[]
+     */
+    private static function findCanonicalParts(string $root, string $pathWithoutRoot): array
+    {
+        $parts = \explode('/', $pathWithoutRoot);
+
+        $canonicalParts = [];
+
+        // Collapse "." and "..", if possible
+        foreach ($parts as $part) {
+            if ('.' === $part || '' === $part) {
+                continue;
+            }
+
+            // Collapse ".." with the previous part, if one exists
+            // Don't collapse ".." if the previous part is also ".."
+            if ('..' === $part && \count($canonicalParts) > 0 && '..' !== $canonicalParts[\count($canonicalParts) - 1]) {
+                \array_pop($canonicalParts);
+
+                continue;
+            }
+
+            // Only add ".." prefixes for relative paths
+            if ('..' !== $part || '' === $root) {
+                $canonicalParts[] = $part;
+            }
+        }
+
+        return $canonicalParts;
     }
 
     /**
