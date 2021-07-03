@@ -12,6 +12,7 @@
 namespace Symfony\Component\Filesystem;
 
 use Symfony\Component\Filesystem\Exception\InvalidArgumentException;
+use Symfony\Component\Filesystem\Exception\RuntimeException;
 
 /**
  * Contains utility methods for handling path strings.
@@ -188,7 +189,7 @@ final class Path
      *
      * The result is a canonical path.
      *
-     * @throws \RuntimeException If your operation system or environment isn't supported
+     * @throws RuntimeException If your operation system or environment isn't supported
      */
     public static function getHomeDirectory(): string
     {
@@ -202,7 +203,7 @@ final class Path
             return self::canonicalize(getenv('HOMEDRIVE').getenv('HOMEPATH'));
         }
 
-        throw new \RuntimeException("Cannot find the home directory path: Your environment or operation system isn't supported.");
+        throw new RuntimeException("Cannot find the home directory path: Your environment or operation system isn't supported.");
     }
 
     /**

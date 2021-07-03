@@ -14,6 +14,6 @@ namespace Symfony\Component\Filesystem\Exception;
 /**
  * @author Théo Fidry <theo.fidry@gmail.com>
  */
-class RuntimeArgumentException extends \RuntimeException implements ExceptionInterface
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 }
