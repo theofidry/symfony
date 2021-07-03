@@ -58,8 +58,8 @@ final class Path
      * ".." segments at the beginning of relative paths are not removed.
      *
      * ```php
-     * echo Path::canonicalize("\webmozart\puli\..\css\style.css");
-     * // => /webmozart/css/style.css
+     * echo Path::canonicalize("\symfony\puli\..\css\style.css");
+     * // => /symfony/css/style.css
      *
      * echo Path::canonicalize("../css/./style.css");
      * // => ../css/style.css
@@ -127,10 +127,10 @@ final class Path
      * where dirname() returns a weird result:
      *
      *  - dirname() does not accept backslashes on UNIX
-     *  - dirname("C:/webmozart") returns "C:", not "C:/"
+     *  - dirname("C:/symfony") returns "C:", not "C:/"
      *  - dirname("C:/") returns ".", not "C:/"
      *  - dirname("C:") returns ".", not "C:/"
-     *  - dirname("webmozart") returns ".", not ""
+     *  - dirname("symfony") returns ".", not ""
      *  - dirname() does not canonicalize the result
      *
      * This method fixes these shortcomings and behaves like dirname()
@@ -409,8 +409,8 @@ final class Path
      * into forward slashes.
      *
      * ```php
-     * echo Path::makeAbsolute("../style.css", "/webmozart/puli/css");
-     * // => /webmozart/puli/style.css
+     * echo Path::makeAbsolute("../style.css", "/symfony/puli/css");
+     * // => /symfony/puli/style.css
      * ```
      *
      * If an absolute path is passed, that path is returned unless its root
@@ -418,13 +418,13 @@ final class Path
      * exception is thrown.
      *
      * ```php
-     * Path::makeAbsolute("/style.css", "/webmozart/puli/css");
+     * Path::makeAbsolute("/style.css", "/symfony/puli/css");
      * // => /style.css
      *
-     * Path::makeAbsolute("C:/style.css", "C:/webmozart/puli/css");
+     * Path::makeAbsolute("C:/style.css", "C:/symfony/puli/css");
      * // => C:/style.css
      *
-     * Path::makeAbsolute("C:/style.css", "/webmozart/puli/css");
+     * Path::makeAbsolute("C:/style.css", "/symfony/puli/css");
      * // InvalidArgumentException
      * ```
      *
@@ -468,7 +468,7 @@ final class Path
      * The relative path is created relative to the given base path:
      *
      * ```php
-     * echo Path::makeRelative("/webmozart/style.css", "/webmozart/puli");
+     * echo Path::makeRelative("/symfony/style.css", "/symfony/puli");
      * // => ../style.css
      * ```
      *
@@ -476,7 +476,7 @@ final class Path
      * path is returned unchanged:
      *
      * ```php
-     * Path::makeRelative("style.css", "/webmozart/puli/css");
+     * Path::makeRelative("style.css", "/symfony/puli/css");
      * // => style.css
      * ```
      *
@@ -484,7 +484,7 @@ final class Path
      * assumption that both paths are relative to the same directory:
      *
      * ```php
-     * Path::makeRelative("style.css", "webmozart/puli/css");
+     * Path::makeRelative("style.css", "symfony/puli/css");
      * // => ../../../style.css
      * ```
      *
@@ -492,7 +492,7 @@ final class Path
      * otherwise an exception is thrown:
      *
      * ```php
-     * Path::makeRelative("C:/webmozart/style.css", "/webmozart/puli");
+     * Path::makeRelative("C:/symfony/style.css", "/symfony/puli");
      * // InvalidArgumentException
      * ```
      *
@@ -500,7 +500,7 @@ final class Path
      * is thrown as well:
      *
      * ```php
-     * Path::makeRelative("/webmozart/style.css", "webmozart/puli");
+     * Path::makeRelative("/symfony/style.css", "symfony/puli");
      * // InvalidArgumentException
      * ```
      *
@@ -587,17 +587,17 @@ final class Path
      *
      * ```php
      * $basePath = Path::getLongestCommonBasePath([
-     *     '/webmozart/css/style.css',
-     *     '/webmozart/css/..'
+     *     '/symfony/css/style.css',
+     *     '/symfony/css/..'
      * ]);
-     * // => /webmozart
+     * // => /symfony
      * ```
      *
      * The root is returned if no common base path can be found:
      *
      * ```php
      * $basePath = Path::getLongestCommonBasePath([
-     *     '/webmozart/css/style.css',
+     *     '/symfony/css/style.css',
      *     '/puli/css/..'
      * ]);
      * // => /
@@ -608,8 +608,8 @@ final class Path
      *
      * ```php
      * $basePath = Path::getLongestCommonBasePath([
-     *     'C:/webmozart/css/style.css',
-     *     'D:/webmozart/css/..'
+     *     'C:/symfony/css/style.css',
+     *     'D:/symfony/css/..'
      * ]);
      * // => null
      * ```
@@ -695,16 +695,16 @@ final class Path
      * into forward slashes.
      *
      * ```php
-     * Path::isBasePath('/webmozart', '/webmozart/css');
+     * Path::isBasePath('/symfony', '/symfony/css');
      * // => true
      *
-     * Path::isBasePath('/webmozart', '/webmozart');
+     * Path::isBasePath('/symfony', '/symfony');
      * // => true
      *
-     * Path::isBasePath('/webmozart', '/webmozart/..');
+     * Path::isBasePath('/symfony', '/symfony/..');
      * // => false
      *
-     * Path::isBasePath('/webmozart', '/puli');
+     * Path::isBasePath('/symfony', '/puli');
      * // => false
      * ```
      */
@@ -762,8 +762,8 @@ final class Path
      * If the root directory is a Windows style partition, the resulting root
      * will always contain a trailing slash.
      *
-     * list ($root, $path) = Path::split("C:/webmozart")
-     * // => ["C:/", "webmozart"]
+     * list ($root, $path) = Path::split("C:/symfony")
+     * // => ["C:/", "symfony"]
      *
      * list ($root, $path) = Path::split("C:")
      * // => ["C:/", ""]
